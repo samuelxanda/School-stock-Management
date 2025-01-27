@@ -54,6 +54,14 @@ const Sidebar = ({ setSelectedTab }) => {
           <Box size={24} />
           {!isCollapsed && <span className="ml-3 text-lg">Stock Management</span>}
         </li>
+        
+        {/* <li
+          className="cursor-pointer flex items-center p-2 hover:bg-blue-600 rounded-lg transition-all"
+          onClick={() => setSelectedTab('StockManagementReport')}
+        >
+          <FileText size={24} />
+          {!isCollapsed && <span className="ml-3 text-lg">Reports</span>}
+        </li> */}
       </ul>
     </div>
   );

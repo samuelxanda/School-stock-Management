@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { PlusCircle, Edit, Trash, Search } from "lucide-react";
+import { PlusCircle, Edit, Trash } from "lucide-react";
+import SidebarForm from './sidebarForm';
+
 
 const StaffManagement = () => {
   const [staff, setStaff] = useState([
@@ -22,9 +24,15 @@ const StaffManagement = () => {
   ]);
 
   const [searchTerm, setSearchTerm] = useState("");
+  
 
   const handleDelete = (id) => {
     setStaff(staff.filter((member) => member.id !== id));
+  };
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const handleFormSubmit = (data) => {
+    console.log('Form Data:', data);
+    alert(`New employee added: ${data.name}`);
   };
 
   return (
@@ -37,18 +45,21 @@ const StaffManagement = () => {
         <input
           type="text"
           placeholder="Search staff..."
-          className="p-2 border rounded-lg flex-1"
+          className="p-2 rounded-lg flex-1 w-40"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <Search className="text-gray-600" />
-      </div>
-
-      {/* Add Staff Button */}
-      <button className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center mb-4">
+        {/* Add Staff Button */}
+      <button onClick={() => setSidebarOpen(true)} className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center mb-4">
         <PlusCircle className="mr-2" />
         Add Staff
-      </button>
+      </button> 
+      <SidebarForm
+        isOpen={isSidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+        onSubmit={handleFormSubmit}
+      />
+      </div>
 
       {/* Staff List */}
       <div className="bg-white shadow-md rounded-lg overflow-hidden">

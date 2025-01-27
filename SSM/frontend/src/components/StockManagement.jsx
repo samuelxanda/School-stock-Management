@@ -1,7 +1,10 @@
 import { useState } from "react";
-import { Search, Filter, Trash, Edit } from "lucide-react";
+import { Search, Filter, Trash, Edit,PlusCircle, Import} from "lucide-react";
+import sidebarStockForm from ' ./sidebarStockForm';
 
 const StockManagement = () => {
+  
+  
   const [categoryFilter, setCategoryFilter] = useState("All");
   const [departmentFilter, setDepartmentFilter] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
@@ -26,6 +29,12 @@ const StockManagement = () => {
         item.category.toLowerCase().includes(searchTerm.toLowerCase()))
     );
   });
+
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const handleFormSubmit = (data) => {
+    console.log('Form Data:', data);
+    alert(`New employee added: ${data.name}`);
+  };
 
   return (
     <div className=" bg-gray-50">
@@ -82,14 +91,22 @@ const StockManagement = () => {
           <input
             type="text"
             placeholder="Search stock items..."
-            className="p-2 w-full border rounded-lg focus:ring-2 focus:ring-blue-500"
+            className="p-2 w-full border rounded-lg focus:ring-2 focus:outline-none border-gray-500 focus:ring-blue-500"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <Search className="text-gray-500" />
+          <button onClick={() => setSidebarOpen(true)} className="bg-blue-600 text-white px-4  rounded-lg flex items-center">
+        <PlusCircle className="mr-2" />
+        Add Items
+      </button>
         </div>
+        
       </div>
-
+    <sidebarStockForm
+      isOpen={isSidebarOpen}
+      onClose={() => setSidebarOpen(false)}
+       onSubmit={handleFormSubmit}
+    />
       {/* Stock Items Table */}
       <div className="bg-white shadow-lg rounded-lg overflow-hidden">
         <table className="table-auto w-full">

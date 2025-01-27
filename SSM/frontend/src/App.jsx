@@ -7,7 +7,7 @@ import Header from './components/Header';
 
 const App = () => {
   const [selectedTab, setSelectedTab] = useState('dashboard');
-
+  
   return (
     <div className="flex h-screen ">
       {/* Sidebar */}
@@ -15,6 +15,8 @@ const App = () => {
 
       {/* Main Content Area */}
       <div className="flex flex-1 flex-col">
+
+      
         {/* Header */}
         <Header />
 
